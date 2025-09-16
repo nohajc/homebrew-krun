@@ -11,6 +11,11 @@ class Libkrun < Formula
     sha256 cellar: :any, arm64_sequoia: "e4eb00e58f84e95caef93d36c403b4dd134fa140f2b884bea4c0d62c076afa2d"
   end
 
+  patch do
+    url "https://raw.githubusercontent.com/slp/homebrew-krun/refs/heads/drop-display/patches/libkrun-disable-display.diff"
+    sha256 "3e11baec017c6dc7bc5c92731b7db19cd597f74c20b4e41497aaa82ea68bfa0e"
+  end
+
   depends_on "rust" => :build
   # Upstream only supports Hypervisor.framework on arm64
   depends_on arch: :arm64

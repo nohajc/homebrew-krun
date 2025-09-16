@@ -1,0 +1,167 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 08b7435..bfcf39c 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -195,25 +195,7 @@ dependencies = [
+  "proc-macro2",
+  "quote",
+  "regex",
+- "rustc-hash 1.1.0",
+- "shlex",
+- "syn",
+-]
+-
+-[[package]]
+-name = "bindgen"
+-version = "0.72.0"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "4f72209734318d0b619a5e0f5129918b848c416e122a3c4ce054e03cb87b726f"
+-dependencies = [
+- "bitflags 2.9.1",
+- "cexpr",
+- "clang-sys",
+- "itertools",
+- "proc-macro2",
+- "quote",
+- "regex",
+- "rustc-hash 2.1.1",
++ "rustc-hash",
+  "shlex",
+  "syn",
+ ]
+@@ -467,7 +449,6 @@ dependencies = [
+  "crossbeam-channel",
+  "hvf",
+  "imago",
+- "krun_display",
+  "kvm-bindings",
+  "kvm-ioctls",
+  "libc",
+@@ -879,17 +860,6 @@ dependencies = [
+  "vm-memory",
+ ]
+ 
+-[[package]]
+-name = "krun_display"
+-version = "0.1.0"
+-dependencies = [
+- "bindgen 0.72.0",
+- "bitflags 2.9.1",
+- "log",
+- "static_assertions",
+- "thiserror 2.0.12",
+-]
+-
+ [[package]]
+ name = "kvm-bindings"
+ version = "0.12.0"
+@@ -937,7 +907,6 @@ dependencies = [
+  "devices",
+  "env_logger",
+  "hvf",
+- "krun_display",
+  "kvm-bindings",
+  "kvm-ioctls",
+  "libc",
+@@ -996,7 +965,7 @@ version = "0.8.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "bf0d9716420364790e85cbb9d3ac2c950bde16a7dd36f3209b7dfdfc4a24d01f"
+ dependencies = [
+- "bindgen 0.69.5",
++ "bindgen",
+  "cc",
+  "system-deps",
+ ]
+@@ -1302,7 +1271,7 @@ version = "0.8.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "849e188f90b1dda88fe2bfe1ad31fe5f158af2c98f80fb5d13726c44f3f01112"
+ dependencies = [
+- "bindgen 0.69.5",
++ "bindgen",
+  "libspa-sys",
+  "system-deps",
+ ]
+@@ -1515,12 +1484,6 @@ version = "1.1.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "08d43f7aa6b08d49f382cde6a7982047c3426db949b1424bc4b7ec9ae12c6ce2"
+ 
+-[[package]]
+-name = "rustc-hash"
+-version = "2.1.1"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "357703d41365b4b27c590e3ed91eabb1b663f07c4c084095e60cbed4362dff0d"
+-
+ [[package]]
+ name = "rustc_version"
+ version = "0.4.1"
+@@ -1961,7 +1924,6 @@ dependencies = [
+  "hvf",
+  "kbs-types",
+  "kernel",
+- "krun_display",
+  "kvm-bindings",
+  "kvm-ioctls",
+  "libc",
+diff --git a/src/devices/Cargo.toml b/src/devices/Cargo.toml
+index 52b2bbf..272df7c 100644
+--- a/src/devices/Cargo.toml
++++ b/src/devices/Cargo.toml
+@@ -11,7 +11,7 @@ tdx = ["blk", "tee"]
+ net = []
+ blk = []
+ efi = ["blk", "net"]
+-gpu = ["rutabaga_gfx", "thiserror", "zerocopy", "zerocopy-derive", "krun_display"]
++gpu = ["rutabaga_gfx", "thiserror", "zerocopy", "zerocopy-derive"]
+ snd = ["pw", "thiserror"]
+ virgl_resource_map2 = []
+ nitro = []
+@@ -31,7 +31,6 @@ virtio-bindings = "0.2.0"
+ vm-memory = { version = ">=0.13", features = ["backend-mmap"] }
+ zerocopy = { version = "0.6.3", optional = true }
+ zerocopy-derive = { version = "0.6.3", optional = true }
+-krun_display = { path = "../krun_display", optional = true, features = ["bindgen_clang_runtime"] }
+ 
+ arch = { path = "../arch" }
+ utils = { path = "../utils" }
+diff --git a/src/libkrun/Cargo.toml b/src/libkrun/Cargo.toml
+index 8aa7929..0fac51d 100644
+--- a/src/libkrun/Cargo.toml
++++ b/src/libkrun/Cargo.toml
+@@ -12,7 +12,7 @@ tdx = [ "blk", "tee" ]
+ net = []
+ blk = []
+ efi = [ "blk", "net" ]
+-gpu = ["krun_display"]
++gpu = []
+ snd = []
+ virgl_resource_map2 = []
+ nitro = [ "dep:nitro", "dep:nitro-enclaves" ]
+@@ -24,7 +24,6 @@ libc = ">=0.2.39"
+ libloading = "0.8"
+ log = "0.4.0"
+ once_cell = "1.4.1"
+-krun_display = { path = "../krun_display", optional = true, features = ["bindgen_clang_runtime"] }
+ 
+ devices = { path = "../devices" }
+ polly = { path = "../polly" }
+diff --git a/src/vmm/Cargo.toml b/src/vmm/Cargo.toml
+index c01df34..98aca89 100644
+--- a/src/vmm/Cargo.toml
++++ b/src/vmm/Cargo.toml
+@@ -11,7 +11,7 @@ tdx = [ "blk", "tee", "kbs-types", "serde", "serde_json", "curl", "dep:tdx" ]
+ net = []
+ blk = []
+ efi = [ "blk", "net" ]
+-gpu = ["krun_display"]
++gpu = []
+ snd = []
+ nitro = []
+ 
+@@ -23,7 +23,6 @@ linux-loader = { version = "0.13.0", features = ["bzimage", "elf", "pe"] }
+ log = "0.4.0"
+ vm-memory = { version = ">=0.13", features = ["backend-mmap"] }
+ vmm-sys-util = ">=0.14"
+-krun_display = { path = "../krun_display", optional = true, features = ["bindgen_clang_runtime"] }
+ 
+ arch = { path = "../arch" }
+ arch_gen = { path = "../arch_gen" }

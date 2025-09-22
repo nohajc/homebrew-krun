@@ -12,7 +12,7 @@ class Libkrun < Formula
   end
 
   patch do
-    url "https://raw.githubusercontent.com/slp/homebrew-krun/refs/heads/drop-display/patches/libkrun-disable-display.diff"
+    url "https://raw.githubusercontent.com/slp/homebrew-krun/refs/heads/master/patches/libkrun-disable-display.diff"
     sha256 "3e11baec017c6dc7bc5c92731b7db19cd597f74c20b4e41497aaa82ea68bfa0e"
   end
 

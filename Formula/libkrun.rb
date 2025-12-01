@@ -1,29 +1,32 @@
 class Libkrun < Formula
   desc "Dynamic library providing KVM-based process isolation capabilities"
   homepage "https://github.com/containers/libkrun"
-  version "1.15.1"
-  url "https://github.com/containers/libkrun/releases/download/v1.15.1/libkrun-1.15.1-prebuilt-aarch64.tar.gz"
-  sha256 "0ca2999968dbc469e9949d5a61f4399e339a51f3db7ff356aba3b8f13fc4c075"
+  version "1.16.0"
+  url "https://github.com/containers/libkrun/archive/refs/tags/v1.16.0.tar.gz"
+  sha256 "04b6f01f44e263d168757ebcd9bc037d7c5836c1987a547c6b2fa5837abe1ab1"
   license "Apache-2.0"
 
   bottle do
     root_url "https://raw.githubusercontent.com/slp/homebrew-krun/master/bottles"
-    sha256 cellar: :any, arm64_sequoia: "e4eb00e58f84e95caef93d36c403b4dd134fa140f2b884bea4c0d62c076afa2d"
+    sha256 cellar: :any, arm64_tahoe: "e4b2f084e931035d9c8420d16021fdd44ca2472f937ce56a15cdcc8531a7e982"
   end
 
   patch do
-    url "https://raw.githubusercontent.com/slp/homebrew-krun/refs/heads/master/patches/libkrun-disable-display.diff"
-    sha256 "3e11baec017c6dc7bc5c92731b7db19cd597f74c20b4e41497aaa82ea68bfa0e"
+    url "https://raw.githubusercontent.com/slp/homebrew-krun/refs/heads/master/patches/libkrun-makefile-add-cross-compilation-support.diff"
+    sha256 "2d98e025255a0498d069cd7e585ecfdb98277dec9e229102b5c875ac3024567d"
   end
 
   depends_on "rust" => :build
   # Upstream only supports Hypervisor.framework on arm64
   depends_on arch: :arm64
   depends_on "dtc"
+  depends_on "lld"
   depends_on "libkrunfw"
+  depends_on "virglrenderer"
+  depends_on "xz"
 
   def install
-    system "make", "BLK=1", "NET=1"
+    system "make", "BLK=1", "NET=1", "GPU=1"
     system "make", "PREFIX=#{prefix}", "install"
   end
 

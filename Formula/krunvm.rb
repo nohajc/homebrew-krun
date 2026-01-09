@@ -7,6 +7,7 @@ class Krunvm < Formula
 
   bottle do
     root_url "https://raw.githubusercontent.com/slp/homebrew-krun/master/bottles"
+    sha256 cellar: :any, arm64_tahoe: "ec2a55ec680240e7d3bf2ac04e3c3c47028b3e08438d4c0d4ccca92105684f4a"
     sha256 cellar: :any, arm64_sequoia: "56a6302357c4479ac920b8bf233a43e0bcc134c9c809414a8c676d853839b58b"
   end
 

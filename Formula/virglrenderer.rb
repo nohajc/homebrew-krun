@@ -7,6 +7,7 @@ class Virglrenderer < Formula
 
   bottle do
     root_url "https://raw.githubusercontent.com/slp/homebrew-krunkit/master/bottles"
+    sha256 cellar: :any, arm64_tahoe: "18c6cb0b27a142c07b4aa078cf067ab11c44deddcde4f8a32f3c15d32616d9c4"
     sha256 cellar: :any, arm64_sequoia: "e124a40a85eeb639eaff47a1964095bb5a8e107a9b3810d2e495971e62f9a689"
   end
 

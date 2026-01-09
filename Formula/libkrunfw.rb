@@ -9,6 +9,7 @@ class Libkrunfw < Formula
   bottle do
     root_url "https://raw.githubusercontent.com/slp/homebrew-krun/master/bottles"
     sha256 cellar: :any, arm64_tahoe: "81da1d9dc61b55a9328bd2a112bd6d31171139fdfecb3858d3ebdc42de40ab65"
+    sha256 cellar: :any, arm64_sequoia: "7ece36e6da788917d7b81b11380bc6bce9f44edc3ba980656b06c4aa5b307749"
   end
 
   # libkrun, our only consumer, only supports Hypervisor.framework on arm64

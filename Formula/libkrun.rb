@@ -1,19 +1,14 @@
 class Libkrun < Formula
   desc "Dynamic library providing KVM-based process isolation capabilities"
   homepage "https://github.com/containers/libkrun"
-  version "1.16.0"
-  url "https://github.com/containers/libkrun/archive/refs/tags/v1.16.0.tar.gz"
-  sha256 "04b6f01f44e263d168757ebcd9bc037d7c5836c1987a547c6b2fa5837abe1ab1"
+  version "1.17.0"
+  url "https://github.com/containers/libkrun/archive/refs/tags/v1.17.0.tar.gz"
+  sha256 "ccefe9f6a4af2152a6572d3536bb83deb7d598d6421d8b186ce2a148a6d3b8e9"
   license "Apache-2.0"
 
   bottle do
     root_url "https://raw.githubusercontent.com/slp/homebrew-krun/master/bottles"
-    sha256 cellar: :any, arm64_tahoe: "e4b2f084e931035d9c8420d16021fdd44ca2472f937ce56a15cdcc8531a7e982"
-  end
-
-  patch do
-    url "https://raw.githubusercontent.com/slp/homebrew-krun/refs/heads/master/patches/libkrun-makefile-add-cross-compilation-support.diff"
-    sha256 "2d98e025255a0498d069cd7e585ecfdb98277dec9e229102b5c875ac3024567d"
+    sha256 cellar: :any, arm64_tahoe: "241012408e31b2f2b4ea6151833f2b32f7d4b807b579fd14c8966f181cdc9d45"
   end
 
   depends_on "rust" => :build

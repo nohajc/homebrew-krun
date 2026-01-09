@@ -6,8 +6,8 @@ class Buildah < Formula
   license "Apache-2.0"
 
   bottle do
-    rebuild 1
     root_url "https://raw.githubusercontent.com/slp/homebrew-krun/master/bottles"
+    sha256 cellar: :any, arm64_tahoe: "a147965cf518957f04c69409ba48b32abadde84e4ca3fa0aa14af733a6f4d750"
     sha256 cellar: :any, arm64_sequoia: "b044294d44ad99067eb5807fabab5c1f85d8c6f55219a410315893c48fb45ba5"
   end
 

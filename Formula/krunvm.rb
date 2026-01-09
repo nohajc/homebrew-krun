@@ -1,14 +1,14 @@
 class Krunvm < Formula
   desc "Manage lightweight VMs created from OCI images"
   homepage "https://github.com/slp/krunvm"
-  url "https://github.com/containers/krunvm/archive/refs/tags/v0.2.4.tar.gz"
-  sha256 "d71467fa62c43141334f8d40b81aa7297ddd6e68d5dda9e1202b085e6d81655c"
+  url "https://github.com/containers/krunvm/archive/refs/tags/v0.2.5.tar.gz"
+  sha256 "9b09bd38b9beb134d2842bca74d0ef7b160408f0e583d31173a007e893cf504a"
   license "Apache-2.0"
 
   bottle do
     root_url "https://raw.githubusercontent.com/slp/homebrew-krun/master/bottles"
-    sha256 cellar: :any, arm64_tahoe: "ec2a55ec680240e7d3bf2ac04e3c3c47028b3e08438d4c0d4ccca92105684f4a"
-    sha256 cellar: :any, arm64_sequoia: "56a6302357c4479ac920b8bf233a43e0bcc134c9c809414a8c676d853839b58b"
+    sha256 cellar: :any, arm64_tahoe: "cb295f8d3103383eef425e86f2578f13952712f301471f85ed8f003b9d9e4266"
+    sha256 cellar: :any, arm64_sequoia: "cfc87085676d5c43e9974455f5e9a77a86afbd012b39d78be6942bcac97dcdf6"
   end
 
   depends_on "asciidoctor" => :build

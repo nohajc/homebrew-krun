@@ -1,15 +1,15 @@
 class Libkrun < Formula
   desc "Dynamic library providing KVM-based process isolation capabilities"
   homepage "https://github.com/containers/libkrun"
-  version "1.17.3"
-  url "https://github.com/containers/libkrun/archive/refs/tags/v1.17.3.tar.gz"
-  sha256 "8fb85ec8342c1fd85781736ef7259f42f0036336bdb348b388603cca36301914"
+  version "1.17.4"
+  url "https://github.com/containers/libkrun/archive/refs/tags/v1.17.4.tar.gz"
+  sha256 "2708a3c207c5493ee02de1781836c2511e54eb280633fcc7058fee983a6c2fe3"
   license "Apache-2.0"
 
   bottle do
     root_url "https://raw.githubusercontent.com/slp/homebrew-krun/master/bottles"
-    sha256 cellar: :any, arm64_tahoe: "6ae11c2bcf3fede9005d08e76e3e39df7b86c024374d8adf47c2510afc00cf06"
-    sha256 cellar: :any, arm64_sequoia: "6ce4dfb526671af42faabed8909e7e0a030c36d8f8244f168baefc41410854bf"
+    sha256 cellar: :any, arm64_tahoe: "c36a9013a414616270cadf9a31767a91dde967d4a76134304e2ab75d76af1518"
+    sha256 cellar: :any, arm64_sequoia: "8d42c08ba7d94b8cb15d1cb64af7025b39df3e3cda3d306904596d4589fc495c"
   end
 
   depends_on "rust" => :build
@@ -22,7 +22,7 @@ class Libkrun < Formula
   depends_on "xz"
 
   def install
-    system "make", "BLK=1", "NET=1", "GPU=1"
+    system "make", "BLK=1", "NET=1", "GPU=1", "TIMESYNC=1"
     system "make", "PREFIX=#{prefix}", "install"
   end
 

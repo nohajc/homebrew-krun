@@ -6,6 +6,7 @@ class Gvproxy < Formula
   license "Apache-2.0"
 
   bottle do
+    root_url "https://raw.githubusercontent.com/slp/homebrew-krun/master/bottles"
     sha256 cellar: :any_skip_relocation, arm64_tahoe: "e168fbcc20349cfdcd524487cbb81ce223a72c44bde4542bb761f74f1b8d5cc3"
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "70edf64228db59e9b57953ab3b2a12c910f0ffd41ec1583ce9838ec41a45b865"
   end

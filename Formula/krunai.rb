@@ -1,14 +1,14 @@
 class Krunai < Formula
   desc "An easy to use, fast and powerful tool for running AI agents inside microVM sandboxes."
   homepage "https://github.com/slp/krunai"
-  url "https://github.com/slp/krunai/archive/refs/tags/v0.2.2.tar.gz"
-  sha256 "379899f9010439fadf67ac1f9bbadd6eedce1dbb7945661f829aafc68e1cd25e"
+  url "https://github.com/slp/krunai/archive/refs/tags/v0.2.4.tar.gz"
+  sha256 "de8612266621144b0234bce27ac8b615b662c8f7b0c7eef81805d780805b10d4"
   license "Apache-2.0"
 
   bottle do
     root_url "https://raw.githubusercontent.com/slp/homebrew-krun/master/bottles"
-    sha256 cellar: :any, arm64_tahoe: "6a4812fd547c12f5c7a90f5238844e1f1837f71813790a4f5fc767805beb3304"
-    sha256 cellar: :any, arm64_sequoia: "32b0fb417948f5fcdb87daa59661430ce091a75e57289f9a3231ecc9a2a6b978"
+    sha256 cellar: :any, arm64_tahoe: "5a21196fcc559402eb28d5b678ea84a8ab17ee0d79a3bdcacf5362f41fb8f745"
+    sha256 cellar: :any, arm64_sequoia: "a36843adbfa37de7ce4646d4573d260566810b6513aee9f474e25c637c95cf63"
   end
 
   depends_on "rust" => :build

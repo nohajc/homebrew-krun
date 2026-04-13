@@ -12,11 +12,11 @@ class Libkrun < Formula
     sha256 cellar: :any, arm64_sequoia: "8d42c08ba7d94b8cb15d1cb64af7025b39df3e3cda3d306904596d4589fc495c"
   end
 
+  depends_on "lld" => :build
   depends_on "rust" => :build
   # Upstream only supports Hypervisor.framework on arm64
   depends_on arch: :arm64
   depends_on "dtc"
-  depends_on "lld"
   depends_on "libkrunfw"
   depends_on "virglrenderer"
   depends_on "xz"
